@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { Navbar, NavbarBrand, Button, Form, FormGroup, Input, Modal, ModalBody, Container, Icon, Spinner, Label } from '@sveltestrap/sveltestrap';
-	import { handlePossibleZodError } from '$lib';
-	import { goto } from '$app/navigation';
 	import { z } from 'zod';
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
