@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 	import PasswordFormPart from '$lib/components/formParts/passwordFormPart.svelte';
+	import { goto } from '$app/navigation';
 
 
 	let username = $state("");
@@ -19,6 +20,7 @@
 	})
 
 	async function login() {
+		goto("./portal/dashboard");
 		// let loginResult: { username: string; password: string; };
 		// try {
 		// 	const usernameParsed = await loginSchema.parseAsync({
@@ -59,34 +61,15 @@
 	});
 </script>
 
-<!-- Fixed Navbar -->
-<Navbar
-	color="dark"
-	class="d-flex justify-content-between align-items-center px-3 position-fixed top-0 w-100 shadow"
-	style="z-index: 1050;"
->
-	<NavbarBrand href="https://bfpechague.com.ph" class="text-warning fw-bold">
-		https://bfpechague.com.ph
-	</NavbarBrand>
-</Navbar>
-
 <!-- Fixed Background & Centered Content -->
 <div class="vh-100 w-100 position-fixed top-0 start-0 overflow-hidden">
 	<div
 		class="position-absolute top-50 start-50 translate-middle text-white text-center"
 	>
 		<div class="d-flex flex-column bg-dark bg-opacity-75 p-4 rounded">
-			<h1 class="display-4 text-warning">WELCOME TO<br />BFP ECHAGUE!</h1>
+			<h1 class="display-4 text-warning">BOARD DOCUMENTS DATABASE</h1>
 			<hr class="border border-warning w-100 my-2" style="height: 3px;" />
-			<p class="lead text-warning">FIRE MAPPING SYSTEM</p>
-			<hr class="border border-warning w-100 my-2" style="height: 3px;" />
-			<h5 class="text-warning">CONTACT DEVELOPERS</h5>
-			<p class="text-warning d-flex align-items-center gap-2 justify-content-center m-0">
-				<Icon name="telephone-fill" class="fs-3" /> 09123456789 | <Icon
-					name="telephone-fill"
-					class="fs-3"
-				/> 09246810123
-			</p>
+			<p class="lead text-warning">A Document Searching System</p>
 		</div>
 
 		<div class="d-flex mt-2 w-100">
@@ -114,7 +97,7 @@
 			<h3 class="bold">LOG IN</h3>
 		</div>
 
-		<Form on:submit={login}>
+		<Form>
 			<FormGroup>
 				<Label for="username">Username</Label>
 				<Input type="text" id="username" bind:value={username} required placeholder="Username" />
@@ -122,7 +105,7 @@
 
 			<PasswordFormPart toFor="password" performValidation={false} bind:this={passwordFp} />
 
-			<Button color="dark" class="w-50 mt-3" type="submit">
+			<Button color="dark" class="w-50 mt-3" on:click={login}>
 				<div class="d-flex justify-content-center w-100">
 					{#if loggingIn}
 						<div class="d-flex flex-row align-items-center">
